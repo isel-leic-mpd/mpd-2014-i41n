@@ -18,4 +18,11 @@ public class Binder {
         return res;
     }
 
+    public static <T> T bindTo(Class<T> klass, Map<String, Object> fieldsVals){
+        /*
+         * »»»»»» TPC para a aula 04
+         */
+        return null;
+    }
+    
 }
