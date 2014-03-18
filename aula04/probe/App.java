@@ -14,14 +14,25 @@ public class App {
     public static void main(String[] args) 
             throws ParseException, IllegalAccessException, InstantiationException
     {
+        /*
+         Arrange
+        */
         Student s1 = new Student(31531, sdf.parse("05-6-1994"), "Jose Cocacola", null);
         Map<String, Object> s1fields = Binder.getFieldsValues(s1);
-
+        /*
+          Act
+        */
         StudentDto s2 = Binder.bindTo(StudentDto.class, s1fields);
         System.out.println(s2);
+        
+        /*
+        if(s2.id != s1.id){
+            throw new IllegalStateException();
+        }
+        */
         assert s2.id == s1.id;
         assert s2.name.equals(s1.name);
-        assert s2.birthDate == null;
+        assert s1.birthDate.equals(s2.birthDate);
     }
 }
 
