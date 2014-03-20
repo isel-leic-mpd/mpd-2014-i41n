@@ -1,7 +1,9 @@
 package pt.isel.mpd14.probe.test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -34,9 +36,30 @@ public class BinderTest extends TestCase{
             throw new IllegalStateException();
         }
         */
-        Assert.assertEquals(s1.id, s2.id);
-        Assert.assertEquals(s1.name, s2.name);
+        Assert.assertEquals(s1.getId(), s2.id);
+        Assert.assertEquals(s1.getName(), s2.name);
         Assert.assertEquals(null, s2.birthDate);
 
+    }
+    
+    public void test_bind_to_student_properties() throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ParseException{
+        /*
+        Arrange
+        */
+        Map<String, Object> v = new HashMap<>();
+        v.put("name", "Maria josefina");
+        v.put("id", 657657);
+        v.put("birthdate", sdf.parse("4-5-1997"));
+        /*
+        Act
+        */
+        Student s = Binder.bindToProps(Student.class, v);
+        /*
+        Assert
+        */
+        Assert.assertEquals(v.get("name"), s.getName());
+        Assert.assertEquals(v.get("id"), new Integer(s.getId()));
+        Assert.assertEquals(v.get("birthdate"), s.getBirthDate());
+    
     }
 }

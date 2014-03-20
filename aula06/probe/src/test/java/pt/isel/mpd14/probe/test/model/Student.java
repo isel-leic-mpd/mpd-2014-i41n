@@ -33,12 +33,17 @@ class Course {
 
 public class Student {
 
-    public final int id;
-    public final Date birthDate;
-    public final List<Grade> grades;
-    public final String name;
-    public final Course course;
+    private int id;
+    private Date birthDate;
+    private List<Grade> grades;
+    private String name;
+    private Course course;
 
+    public Student() {
+    }
+
+    
+    
     public Student(int id, Date birthDate, String name, Course course) {
         this.id = id;
         this.birthDate = birthDate;
@@ -46,4 +51,46 @@ public class Student {
         this.course = course;
         this.grades = new LinkedList<>();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
+    
 }
