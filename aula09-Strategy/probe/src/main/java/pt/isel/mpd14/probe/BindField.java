@@ -17,7 +17,7 @@
 package pt.isel.mpd14.probe;
 
 import java.lang.reflect.Field;
-import static pt.isel.mpd14.probe.util.SneakyUtils.asRuntimeException;
+import static pt.isel.mpd14.probe.util.SneakyUtils.throwAsRTException;
 
 /**
  *
@@ -50,7 +50,7 @@ public class BindField implements BindMember {
                 }
             }
         } catch (IllegalArgumentException | IllegalAccessException ex) {
-            throw asRuntimeException(ex);
+            throwAsRTException(ex);
         }
         return false;
 

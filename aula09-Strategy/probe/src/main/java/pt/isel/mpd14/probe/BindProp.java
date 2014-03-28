@@ -18,7 +18,7 @@ package pt.isel.mpd14.probe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import static pt.isel.mpd14.probe.util.SneakyUtils.asRuntimeException;
+import static pt.isel.mpd14.probe.util.SneakyUtils.throwAsRTException;
 
 /**
  *
@@ -47,7 +47,7 @@ public class BindProp implements BindMember {
                 }
             }
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            throw asRuntimeException(ex);
+            throwAsRTException(ex);
         }
         return false;
 

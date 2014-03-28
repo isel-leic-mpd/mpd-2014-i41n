@@ -17,9 +17,7 @@
 
 package pt.isel.mpd14.probe.util;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static pt.isel.mpd14.probe.util.SneakyUtils.asRuntimeException;
+import static pt.isel.mpd14.probe.util.SneakyUtils.throwAsRTException;
 
 /**
  *
@@ -34,16 +32,16 @@ public class SneakyApp {
     public static void teste(){
         try {
             m(0);
-        } catch (Exception ex) {
-            asRuntimeException(ex);
+        } catch (IllegalAccessException ex) {
+            throwAsRTException(ex);
         }
     }
-    public static void m(int div) throws Exception{
+    public static void m(int div) throws IllegalAccessException {
         try{
             int n = 5;
             int res = n/div;
         }catch(java.lang.ArithmeticException ex){
-            throw new Exception("Illegal div = " +  div);
+            throw new IllegalAccessException("Illegal div = " +  div);
         }
     }
 }

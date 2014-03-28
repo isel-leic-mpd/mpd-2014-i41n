@@ -23,8 +23,8 @@ package pt.isel.mpd14.probe.util;
 public class SneakyUtils {
     
     
-    public static RuntimeException asRuntimeException(Throwable t) {
-        return SneakyUtils.<RuntimeException>sneakyThrow(t);
+    public static void throwAsRTException(Throwable t) {
+        SneakyUtils.<RuntimeException>sneakyThrow(t);
     }
     
     /*
@@ -33,7 +33,7 @@ public class SneakyUtils {
      * http://www.mail-archive.com/javaposse@googlegroups.com/msg05984.html
      */
 
-    public static <T extends Throwable> T sneakyThrow(Throwable t) {
-        return (T) t;
+    public static <T extends Throwable> void sneakyThrow(Throwable t) throws T {
+        throw (T) t;
     }
 }

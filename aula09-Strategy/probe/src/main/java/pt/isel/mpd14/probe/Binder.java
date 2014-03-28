@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pt.isel.mpd14.probe.util.SneakyUtils;
-import static pt.isel.mpd14.probe.util.SneakyUtils.asRuntimeException;
+import static pt.isel.mpd14.probe.util.SneakyUtils.throwAsRTException;
 
 public class Binder {
     
@@ -44,9 +44,9 @@ public class Binder {
             }
             return target;
         } catch (InstantiationException | IllegalAccessException ex) {
-            throw asRuntimeException(ex);
+            throwAsRTException(ex);
         }
-
+        throw new IllegalStateException();
     }
 
 }
