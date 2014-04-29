@@ -62,7 +62,7 @@ public class BindProp<T> extends AbstractBindMember<T>{
                     return true;
                 }
             }
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException | NoSuchMethodException ex) {
+        } catch (Exception ex) {
             throwAsRTException(ex);
         } 
         return false;

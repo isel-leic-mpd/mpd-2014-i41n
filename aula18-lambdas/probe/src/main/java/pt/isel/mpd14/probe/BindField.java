@@ -59,7 +59,7 @@ public class BindField<T> extends AbstractBindMember<T> {
                     }
                 }
             }
-        } catch (IllegalArgumentException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
+        } catch (Exception ex) {
             throwAsRTException(ex);
         } 
         return false;

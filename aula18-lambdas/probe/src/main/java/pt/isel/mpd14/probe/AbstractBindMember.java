@@ -55,9 +55,10 @@ public abstract class AbstractBindMember<T> implements BindMember<T> {
                             if(m.getName().equals(methodName)) {
                                 if (m.getReturnType() != void.class && m.getParameterCount() != 0) {
                                     m.setAccessible(true);
-                                    formats.put(mb, new FormatterAdpater(m));
-                                    formats.put(mb, wrapMethodIntoFormatter(m));
-                                    formats.put(mb, o -> m.invoke(null, o));
+                                    // formats.put(mb, new FormatterAdpater(m));
+                                    // formats.put(mb, wrapMethodIntoFormatter(m));
+                                    formats.put(mb, o -> m.invoke(null, o)); // lambda statement
+                                    // formats.put(mb, o -> {return m.invoke(null, o);}); // lambda block
                                 }
                             }
                         }
