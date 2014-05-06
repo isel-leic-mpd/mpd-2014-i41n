@@ -15,7 +15,8 @@ class App
         d.stds.stream()
                 .filter(s -> s.nr > 100)
                 .sorted((s1, s2) -> s1.name.compareTo(s2.name))
-                .forEach(s -> System.out.println(s));
+                .forEach(System.out::println);
+                //.forEach(s -> System.out.println(s));
 
         Student s = d.randStudent();
         System.out.println("Aluno sorteado = " + s);
