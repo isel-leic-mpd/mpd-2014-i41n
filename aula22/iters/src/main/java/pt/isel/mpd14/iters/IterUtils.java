@@ -12,9 +12,9 @@ import java.util.List;
  *
  * @author Miguel Gamboa at CCISEL
  */
-public class ListUtils {
+public class IterUtils {
     
     public static <T> Queryable<T> query(List<T> src){
-        return new ListQueryable(src);
+        return new IterableQueryable(src);
     }
 }

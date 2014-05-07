@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 /**
  *
  * @author Miguel Gamboa at CCISEL
+ * @param <T>
  */
 public interface Queryable<T> extends Iterable<T>{
     
