@@ -23,8 +23,8 @@ public class Program {
     public static void main(String[] args) throws IOException {
         Dealer d = new Dealer(new URL(classroomUrl));
 
-        // String name = IterUtils.query(d.stds) // TPC Alinea 3
-        String name = ListUtils.query(d.stds) // TPC Alinea 2
+        String name = IterUtils.query(d.stds) // TPC Alinea 3
+        // String name = ListUtils.query(d.stds) // TPC Alinea 2
         // String name = d.stds.stream() // TPC Alinea 1
                 .filter(s -> {
                     trace("filter1");
