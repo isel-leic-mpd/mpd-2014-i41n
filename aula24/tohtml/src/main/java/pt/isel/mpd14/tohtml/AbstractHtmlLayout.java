@@ -13,14 +13,17 @@ package pt.isel.mpd14.tohtml;
 public abstract class AbstractHtmlLayout {
     
     public String buildPage(Object o){
-        String res = buildHeader(o);
-        res += buildBody(o);
-        res += buildEnd();
+        String res = "<html>\n";
+        res += "   <head>\n";
+        res += buildHeadContent(o);
+        res += "   </head>\n";
+        res += "   <body>\n";
+        res += buildBodyContent(o);
+        res += "   </body>\n";
+        res += "</html>\n";
         return res;
     }
     
-    protected abstract String buildHeader(Object o);
-    protected abstract String buildBody(Object o);
-    protected abstract String buildEnd();
-    
+    protected abstract String buildHeadContent(Object o);
+    protected abstract String buildBodyContent(Object o);   
 }
