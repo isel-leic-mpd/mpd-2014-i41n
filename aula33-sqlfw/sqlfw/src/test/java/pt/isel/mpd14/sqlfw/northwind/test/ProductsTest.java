@@ -31,27 +31,28 @@ public class ProductsTest {
     }
 
     @Test
-    public void test_product_get_by_id() throws SQLException {
-        SqlExecutor exec = new SqlExecutor(ds);
-        
-        String cmdGetAllProducts = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock "
-                        + "FROM Products "
-                        + "WHERE ProductId = ?";        
-        
-        SqlConverter<Product> conv = rs -> new Product(
-                rs.getInt(1),
-                rs.getString(2),
-                rs.getDouble(3),
-                rs.getInt(4));
+    public void test_product_get_by_id() throws Exception {
+        try(SqlExecutor exec = new SqlExecutor(ds)){
 
-        Product prod = exec.executeQuery(
-                Product.class,
-                cmdGetAllProducts,
-                conv,
-                7
-        ).iterator().next();
-        
-        Assert.assertEquals("Uncle Bob's Organic Dried Pears", prod.productName);
+            exec.beginConnection(true);
+            String cmdGetAllProducts = 
+                    "SELECT ProductID, ProductName, UnitPrice, UnitsInStock "
+                    + "FROM Products "
+                    + "WHERE ProductId = ?";        
 
+            SqlConverter<Product> conv = rs -> new Product(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDouble(3),
+                    rs.getInt(4));
+
+            Product prod = exec.executeQuery(
+                    cmdGetAllProducts,
+                    conv,
+                    7
+            ).iterator().next();
+
+            Assert.assertEquals("Uncle Bob's Organic Dried Pears", prod.productName);
+        }
     }
 }

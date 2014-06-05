@@ -12,15 +12,39 @@ package pt.isel.mpd14.sqlfw.northwind;
  */
 public class Supplier {
     public final int supplierID;
-    public final String companyName;
-    public final String contactName;
-    public final String city;
+    private String companyName;
+    private String contactName;
+    private String city;
 
     public Supplier(int supplierID, String companyName, String contactName, String City) {
         this.supplierID = supplierID;
         this.companyName = companyName;
         this.contactName = contactName;
         this.city = City;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
