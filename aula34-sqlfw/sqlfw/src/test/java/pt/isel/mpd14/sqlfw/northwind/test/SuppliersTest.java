@@ -63,7 +63,7 @@ public class SuppliersTest {
             */
             sup.setCity("NY");
             /*
-             * 3. Actualizamos a BD em conformidade com o objecto de domínio Product
+             * 3. Actualizamos a BD em conformidade com o objecto de domínio Supplier
             */
             exec.executeUpdate(updateSupplierById, sup.getCompanyName(), sup.getContactName(), sup.getCity(), sup.supplierID);
             /*
