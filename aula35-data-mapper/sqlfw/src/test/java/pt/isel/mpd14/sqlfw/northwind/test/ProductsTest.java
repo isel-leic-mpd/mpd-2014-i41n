@@ -9,9 +9,11 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.Test;
+import pt.isel.mpd14.sqlfw.DataMapper;
 import pt.isel.mpd14.sqlfw.SqlConverter;
 import pt.isel.mpd14.sqlfw.SqlExecutor;
 import pt.isel.mpd14.sqlfw.northwind.Product;
+import pt.isel.mpd14.sqlfw.northwind.ProductDataMapper;
 
 /**
  *
@@ -35,24 +37,12 @@ public class ProductsTest {
         try(SqlExecutor exec = new SqlExecutor(ds)){
 
             exec.beginConnection(true);
-            String cmdGetAllProducts = 
-                    "SELECT ProductID, ProductName, UnitPrice, UnitsInStock "
-                    + "FROM Products "
-                    + "WHERE ProductId = ?";        
-
-            SqlConverter<Product> conv = rs -> new Product(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getDouble(3),
-                    rs.getInt(4));
-
-            Product prod = exec.executeQuery(
-                    cmdGetAllProducts,
-                    conv,
-                    7
-            ).iterator().next();
-
-            Assert.assertEquals("Uncle Bob's Organic Dried Pears", prod.productName);
+            
+            DataMapper<Product> mapper = new ProductDataMapper(exec);
+            
+            Assert.assertEquals(
+                    "Uncle Bob's Organic Dried Pears", 
+                    mapper.getById(7).productName);
         }
     }
 }
