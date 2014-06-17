@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import pt.isel.mpd14.sqlfw.DataMapper;
 import pt.isel.mpd14.sqlfw.SqlExecutor;
+import pt.isel.mpd14.sqlfw.northwind.Product;
+import pt.isel.mpd14.sqlfw.northwind.ProductDataMapper;
 import pt.isel.mpd14.sqlfw.northwind.Supplier;
 import pt.isel.mpd14.sqlfw.northwind.SupplierDataMapper;
 
@@ -35,7 +37,9 @@ public class SuppliersTest {
         try (SqlExecutor exec = new SqlExecutor(ds)) {
             exec.beginConnection(false);
    
-            DataMapper<Supplier> mapper = new SupplierDataMapper(exec);
+            DataMapper<Supplier> mapper = new SupplierDataMapper(
+                    exec, 
+                    new ProductDataMapper(exec));
             /*
              * 1. Lemos um Supplier
             */
@@ -68,7 +72,10 @@ public class SuppliersTest {
             
             exec.beginConnection(true);
             
-            DataMapper<Supplier> mapper = new SupplierDataMapper(exec);
+            DataMapper<Supplier> mapper = new SupplierDataMapper(
+                    exec, 
+                    new ProductDataMapper(exec));
+            
             
             Assert.assertEquals(
                     "Exotic Liquids", 
@@ -76,4 +83,37 @@ public class SuppliersTest {
         }
 
     }
+    
+    @Test
+    public void test_supplier_getbyid() throws Exception {
+        try (SqlExecutor exec = new SqlExecutor(ds)) {
+            
+            exec.beginConnection(true);
+            
+            DataMapper<Supplier> mapper = new SupplierDataMapper(
+                    exec, 
+                    new ProductDataMapper(exec));
+            
+            
+            Supplier sup = mapper.getById(7);
+            
+            Assert.assertEquals(
+                    "Pavlova, Ltd.", 
+                    sup.getCompanyName());
+            
+            int [] expectedIds = {16, 17, 18, 63, 70};
+            int i = 0;
+            for (Product p : sup.getProducts()) {
+                Assert.assertEquals(
+                    expectedIds[i++], 
+                    p.productID);
+            }
+            
+            
+            
+            
+        }
+
+    }
+
 }

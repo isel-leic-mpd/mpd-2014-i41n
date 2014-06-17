@@ -15,12 +15,14 @@ public class Supplier {
     private String companyName;
     private String contactName;
     private String city;
-
-    public Supplier(int supplierID, String companyName, String contactName, String City) {
+    private Iterable<Product> products;
+    
+    public Supplier(int supplierID, String companyName, String contactName, String City, Iterable<Product> products) {
         this.supplierID = supplierID;
         this.companyName = companyName;
         this.contactName = contactName;
         this.city = City;
+        this.products = products;
     }
 
     public String getCompanyName() {
@@ -45,6 +47,14 @@ public class Supplier {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Iterable<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Iterable<Product> products) {
+        this.products = products;
     }
 
     @Override

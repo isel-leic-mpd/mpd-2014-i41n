@@ -25,12 +25,14 @@ public class Product {
     public final String productName;
     public final double unitPrice;
     public final int unitsInStock;
+    public final int supplierId;
 
-    public Product(int productID, String productName, double unitPrice, int unitsInStock) {
+    public Product(int productID, String productName, double unitPrice, int unitsInStock, int supplierId) {
         this.productID = productID;
         this.productName = productName;
         this.unitPrice = unitPrice;
         this.unitsInStock = unitsInStock;
+        this.supplierId = supplierId;
     }
 
     @Override

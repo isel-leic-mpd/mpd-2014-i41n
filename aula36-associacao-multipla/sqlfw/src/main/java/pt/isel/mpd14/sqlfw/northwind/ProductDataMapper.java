@@ -34,7 +34,7 @@ public class ProductDataMapper extends AbstractDataMapper<Product>{
 
     @Override
     protected String sqlGetAll() {
-        return "SELECT ProductID, ProductName, UnitPrice, UnitsInStock "
+        return "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, SupplierID "
                     + "FROM Products";
     }
 
@@ -44,7 +44,8 @@ public class ProductDataMapper extends AbstractDataMapper<Product>{
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getDouble(3),
-                    rs.getInt(4));
+                    rs.getInt(4),
+                    rs.getInt(5));
     }
 
     @Override
