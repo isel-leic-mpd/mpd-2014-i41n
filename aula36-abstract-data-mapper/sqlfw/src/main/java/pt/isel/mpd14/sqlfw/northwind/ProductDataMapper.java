@@ -8,6 +8,7 @@ package pt.isel.mpd14.sqlfw.northwind;
 
 import java.sql.SQLException;
 import pt.isel.mpd14.sqlfw.AbstractDataMapper;
+import pt.isel.mpd14.sqlfw.DataMapper;
 import pt.isel.mpd14.sqlfw.SqlConverter;
 import pt.isel.mpd14.sqlfw.SqlExecutor;
 import pt.isel.mpd14.sqlfw.SqlSerializer;
@@ -18,8 +19,11 @@ import pt.isel.mpd14.sqlfw.SqlSerializer;
  */
 public class ProductDataMapper extends AbstractDataMapper<Product>{
 
-    public ProductDataMapper(SqlExecutor exec) {
+    final DataMapper<Supplier> mapperSupplier;
+    
+    public ProductDataMapper(SqlExecutor exec, DataMapper<Supplier> mapperSupplier) {
         super(exec);
+        this.mapperSupplier = mapperSupplier;
     }
     
      @Override
@@ -34,7 +38,7 @@ public class ProductDataMapper extends AbstractDataMapper<Product>{
 
     @Override
     protected String sqlGetAll() {
-        return "SELECT ProductID, ProductName, UnitPrice, UnitsInStock "
+        return "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, SupplierId "
                     + "FROM Products";
     }
 
@@ -44,7 +48,8 @@ public class ProductDataMapper extends AbstractDataMapper<Product>{
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getDouble(3),
-                    rs.getInt(4));
+                    rs.getInt(4),
+                mapperSupplier.getById( rs.getInt(5)));
     }
 
     @Override

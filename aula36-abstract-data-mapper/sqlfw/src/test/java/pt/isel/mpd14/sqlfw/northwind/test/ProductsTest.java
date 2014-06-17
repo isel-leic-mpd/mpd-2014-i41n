@@ -6,14 +6,13 @@
 package pt.isel.mpd14.sqlfw.northwind.test;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.Test;
 import pt.isel.mpd14.sqlfw.DataMapper;
-import pt.isel.mpd14.sqlfw.SqlConverter;
 import pt.isel.mpd14.sqlfw.SqlExecutor;
 import pt.isel.mpd14.sqlfw.northwind.Product;
 import pt.isel.mpd14.sqlfw.northwind.ProductDataMapper;
+import pt.isel.mpd14.sqlfw.northwind.SupplierDataMapper;
 
 /**
  *
@@ -38,11 +37,18 @@ public class ProductsTest {
 
             exec.beginConnection(true);
             
-            DataMapper<Product> mapper = new ProductDataMapper(exec);
+            DataMapper<Product> mapper = new ProductDataMapper(
+                    exec, 
+                    new SupplierDataMapper(exec));
+            
+            Product p = mapper.getById(7);
             
             Assert.assertEquals(
                     "Uncle Bob's Organic Dried Pears", 
-                    mapper.getById(7).productName);
+                    p.productName);
+            Assert.assertEquals(
+                    3, 
+                    p.supplier.supplierID);
         }
     }
 }
